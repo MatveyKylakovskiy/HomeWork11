@@ -4,7 +4,7 @@ using System.Collections;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
-namespace HomeWork11
+namespace HomeWork11.FirstTask
 {
     public class MyList<T> : IEnumerable, IEnumerator
     {
