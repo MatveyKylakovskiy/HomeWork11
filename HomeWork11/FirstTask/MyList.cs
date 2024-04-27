@@ -3,13 +3,17 @@ using System;
 using System.Collections;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 namespace HomeWork11.FirstTask
 {
     public class MyList<T> : IEnumerable, IEnumerator
     {
-        private const int DefaultCapacity = 4;
 
+        public delegate void MyListHandler(string message);
+        public event MyListHandler? Notify;
+
+        private const int DefaultCapacity = 4;
         internal T[] _items;
         internal int _size;
         private static readonly T[] s_emptyArray = new T[0];
@@ -42,6 +46,7 @@ namespace HomeWork11.FirstTask
             {
                 _size = size + 1;
                 array[size] = item;
+                Notify?.Invoke($"Элемент {item} добавлен в массив");
             }
             else
             {
@@ -160,6 +165,7 @@ namespace HomeWork11.FirstTask
             if (index >= 0)
             {
                 RemoveAt(index);
+                Notify?.Invoke($"Элемент {item} удаллен из в массива");
                 return true;
             }
 
